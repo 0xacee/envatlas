@@ -1,0 +1,39 @@
+{
+  "name": "envatlas",
+  "version": "0.1.0",
+  "description": "Map environment-variable contracts across code, containers, and example files.",
+  "type": "module",
+  "bin": {
+    "envatlas": "./bin/envatlas.js"
+  },
+  "exports": "./src/index.js",
+  "files": [
+    "bin",
+    "src",
+    "schemas",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "node --test && node bin/envatlas.js --help",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "environment-variables",
+    "configuration",
+    "docker-compose",
+    "devops",
+    "linter"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xacee/envatlas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0xacee/envatlas/issues"
+  }
+}

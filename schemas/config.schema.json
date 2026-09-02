@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/0xacee/envatlas/main/schemas/config.schema.json",
+  "title": "EnvAtlas configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "catalogs": { "$ref": "#/$defs/patterns" },
+    "include": { "$ref": "#/$defs/patterns" },
+    "exclude": { "$ref": "#/$defs/patterns" },
+    "ignore": { "$ref": "#/$defs/patterns" },
+    "allowUnused": { "$ref": "#/$defs/patterns" }
+  },
+  "$defs": {
+    "patterns": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  }
+}

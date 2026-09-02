@@ -1,0 +1,21 @@
+name: Bug report
+description: Report an incorrect inventory or finding
+title: "bug: "
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: Minimal fixture
+      description: Use fake variable names and remove every secret value.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: EnvAtlas and Node.js versions
+    validations:
+      required: true
