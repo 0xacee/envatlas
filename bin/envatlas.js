@@ -4,6 +4,7 @@ import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { scanRepository } from "../src/index.js";
+import { toSarif } from "../src/sarif.js";
 
 const VERSION = "0.1.0";
 const HELP = `EnvAtlas ${VERSION} — map environment-variable contracts without reading values
@@ -16,7 +17,7 @@ Usage:
 Options:
   --root <path>       repository root (default: current directory)
   --config <path>     config path relative to root (default: .envatlas.json)
-  --format <format>   text or json (default: text)
+  --format <format>   text, json, or sarif (default: text)
   --strict            treat warnings as failures
   -h, --help          show help
   -v, --version       show version
@@ -57,8 +58,8 @@ function parseArguments(argv) {
   if (!["check", "explain", "init"].includes(options.command)) {
     throw new Error(`unknown command: ${options.command}`);
   }
-  if (!["text", "json"].includes(options.format)) {
-    throw new Error("--format must be text or json.");
+  if (!["text", "json", "sarif"].includes(options.format)) {
+    throw new Error("--format must be text, json, or sarif.");
   }
   return options;
 }
@@ -135,8 +136,9 @@ async function main() {
     }
 
     const result = await scanRepository(options);
-    if (options.format === "json") {
-      process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+    if (options.format === "json" || options.format === "sarif") {
+      const output = options.format === "sarif" ? toSarif(result) : result;
+      process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
     } else if (options.command === "explain") {
       if (!printExplanation(result, options.name)) process.exitCode = 1;
     } else {

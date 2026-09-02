@@ -1,5 +1,8 @@
 # EnvAtlas
 
+[![CI](https://github.com/0xacee/envatlas/actions/workflows/ci.yml/badge.svg)](https://github.com/0xacee/envatlas/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2563eb.svg)](LICENSE)
+
 **See the environment-variable contract your repository actually has.**
 
 EnvAtlas builds a value-blind inventory from example env files, application
@@ -45,6 +48,9 @@ npx github:0xacee/envatlas check --strict
 
 # Machine-readable CI output
 npx github:0xacee/envatlas check --format json
+
+# Native GitHub code-scanning annotations
+npx github:0xacee/envatlas check --format sarif > envatlas.sarif
 ```
 
 By default EnvAtlas discovers `.env.example`, `.env.sample`, and files ending
@@ -101,6 +107,10 @@ consumed outside the repository.
     node-version: 20
 - run: npx github:0xacee/envatlas check --strict
 ```
+
+`--format sarif` emits SARIF 2.1.0 with precise source locations, ready for
+GitHub code scanning or any SARIF-compatible viewer. JSON output exposes the
+complete deterministic inventory for custom automation.
 
 ## Design boundaries
 
